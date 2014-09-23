@@ -14,13 +14,13 @@ void MobilityCalc(){
     std::vector<double> E_values, vec_0, vec_m20, vec_ratio;
     
     
-    for (double i=0.01.; i<1.6; i+=0.01){
+    for (double i=0.01.; i<0.5; i+=0.01){
         E_values.push_back(i);
         vec_0.push_back(driftVelocity(273, i));
         vec_m20.push_back( driftVelocity(253, i));
         vec_ratio.push_back( driftVelocity(273, i) / driftVelocity(253, i) );
 
-        //cout<<i<<"  v_d: "<<driftVelocity(273, i)<<endl;
+        cout<<i<<"  v_d: "<<driftVelocity(273, i)<<endl;
         
     }
     
@@ -118,27 +118,8 @@ double driftVelocity(double T, double E ) {
     v_d/=pow((1+pow((E/E_c),beta)),1/beta);
     
     // (v_d = mobility * E;)
+    cout<<"vd  "<<v_d<<endl;
     mobility = 10*v_d/E; //multiply by 10 to get into cm^2/Vs
 
     return mobility;
 }
-
-// @param V applied voltage
-// @param Vfd full depletion voltage
-// @param t thickness of the silicon
-// @param y position in the silicon (y=0 on backplane)
-// @return the electric field value
-double field(double V, double Vfd, double t, double y) {
-    double E;
-    double V = 300.; // in V
-    double Vfd = 170.; // in V
-    t = 0.028; // in m or 0.048
-    if (V<Vfd) {
-        double d = t * sqrt(V / Vfd);
-        if (y<(t-d)) E=0;
-        else E=2*Vfd/t/t*(y-(t-d));
-    } else {
-        E = (V-Vfd)/t + 2 * Vfd /t/t * y;
-    }
-    return E;
-
