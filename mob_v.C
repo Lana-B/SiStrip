@@ -59,7 +59,7 @@ void mob_v(){
 
     mob_0->GetYaxis()->SetLabelFont(63); //font in pixels
     mob_0->GetYaxis()->SetLabelSize(16); //in pixels
-    mob_0->GetYaxis()->SetTitle("mobility");
+    mob_0->GetYaxis()->SetTitle("mobility  (cm^{2}/Vs)");
     mob_0->SetTitle("");
     mob_0->SetMinimum(0.);
     mob_0->SetMaximum(1000.);
@@ -79,13 +79,13 @@ void mob_v(){
     mob_300K->Draw("SAME");
  
     pad1->SetLogx();
-    TLegend* leg = new TLegend(0.75, 0.73, .85, .85);
-    leg->SetFillColor(0);
-    leg->AddEntry(mob_m20, " -20C", "l");
-    leg->AddEntry(mob_0, "  0C", "l");
+    TLegend* leg = new TLegend(0.55, 0.73, .85, .85);
+    leg->SetFillColor(0); 
+    leg->AddEntry(mob_m20, "  253K / -20C", "l");
+    leg->AddEntry(mob_0, "  273K / 0C", "l");
     leg->AddEntry(mob_300K, "  300K", "l");
     leg->SetBorderSize(0);
-    leg->SetTextSize(0.07);
+    leg->SetTextSize(0.05);
 
     leg->Draw();
  
